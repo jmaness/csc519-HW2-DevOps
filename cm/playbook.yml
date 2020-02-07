@@ -5,3 +5,6 @@
 - hosts: mattermost
   roles:
     - ping
+    - mysql-deps
+    - role: geerlingguy.mysql
+      become: yes

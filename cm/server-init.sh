@@ -11,6 +11,11 @@ sudo add-apt-repository ppa:ansible/ansible -y
 sudo apt-get update
 sudo apt-get install ansible -y
 
+# Install Ansible Galaxy roles
+pushd "$(dirname "$0")"
+ansible-galaxy install -r requirements.yml
+popd
+
 # Ensure security key has proper permissions
 chmod 700 ~/.ssh/mm_rsa
 
