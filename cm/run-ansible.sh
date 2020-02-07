@@ -13,9 +13,10 @@ function die {
 }
 
 # Check the number of arguments
-[ $# -ge 2 ] || die "usage: $0 <playbook> <inventory>"
+[ $# -ge 3 ] || die "usage: $0 <playbook> <inventory> <vault-password-file>"
 
 PLAYBOOK=$1
 INVENTORY=$2
+VAULT_PASSWORD_FILE=$3
 
-ansible-playbook $PLAYBOOK -i $INVENTORY
+ansible-playbook $PLAYBOOK -i $INVENTORY --vault-password-file $VAULT_PASSWORD_FILE

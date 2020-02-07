@@ -1,2 +1,5 @@
 node_modules/
 *.retry
+
+# Ensure that Ansible Vault password file is not added to source control
+.vault_pass.txt

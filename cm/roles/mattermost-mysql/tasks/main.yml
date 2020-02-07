@@ -1,0 +1,15 @@
+---
+- name: Create the mattermost database
+  mysql_db:
+    login_user: "{{ mysql_root_username }}"
+    login_password: "{{ mysql_root_password }}"
+    name: "{{ mattermost_db_name }}" 
+
+- name: Create mysql user
+  mysql_user:
+    login_user: "{{ mysql_root_username }}"
+    login_password: "{{ mysql_root_password }}"
+    name: "{{ mysql_mmuser_username }}"
+    password: "{{ mysql_mmuser_password }}"
+    host: '%'
+    priv: "{{ mattermost_db_name }}.*:ALL"
