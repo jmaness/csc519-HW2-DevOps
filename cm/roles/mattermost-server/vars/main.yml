@@ -4,4 +4,7 @@ mattermost_archive_url: https://releases.mattermost.com/5.19.1/mattermost-5.19.1
 mattermost_system_user: mattermost
 mattermost_system_group: mattermost
 
-mattermost_site_url: http://mattermost.example.com
+mattermost_server_ip: 127.0.0.1
+mattermost_server_port: 8065
+mattermost_fqdn: mattermost.example.com
+mattermost_site_url: "http://{{ mattermost_fqdn }}"

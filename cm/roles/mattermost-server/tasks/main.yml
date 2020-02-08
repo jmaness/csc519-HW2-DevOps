@@ -5,19 +5,16 @@
     dest: /opt
     remote_src: yes
     creates: /opt/mattermost
-  become: yes
 
 - name: Create the Mattermost system group
   group:
     name: "{{ mattermost_system_group }}"
-  become: yes
 
 - name: Create the Mattermost system user
   user:
     name: "{{ mattermost_system_user }}"
     comment: Mattermost system user
     group: "{{ mattermost_system_group }}"
-  become: yes
 
 - name: Create storage directory for files
   file:
@@ -26,7 +23,6 @@
     owner: "{{ mattermost_system_user }}"
     group: "{{ mattermost_system_group }}"
     recurse: true
-  become: yes
 
 - name: Set the user and group mattermost as the owner of Mattermost files
   file:
@@ -35,7 +31,6 @@
     owner: "{{ mattermost_system_user }}"
     group: "{{ mattermost_system_group }}"
     recurse: true
-  become: yes
 
 - name: "Give write permissions to the {{ mattermost_system_group }} group"
   file:
@@ -43,49 +38,41 @@
     state: directory
     mode: g+w
     recurse: true
-  become: yes
 
 - name: Install jq
   package:
     name: jq
     state: present
-  become: yes
 
 - name: Configure database driver
   shell: |
     jq ".SqlSettings.DriverName=\"mysql\"" /opt/mattermost/config/config.json > /opt/mattermost/config/config.json.tmp
     mv /opt/mattermost/config/config.json.tmp /opt/mattermost/config/config.json
-  become: yes
   become_user: "{{ mattermost_system_user }}"
 
 - name: Configure database datasource
   shell: |
     jq ".SqlSettings.DataSource=\"{{ mysql_mmuser_username }}:{{ mysql_mmuser_password }}@tcp(localhost:3306)/mattermost?charset=utf8mb4,utf8&readTimeout=30s&writeTimeout=30s\"" /opt/mattermost/config/config.json > /opt/mattermost/config/config.json.tmp
     mv /opt/mattermost/config/config.json.tmp /opt/mattermost/config/config.json
-  become: yes
   become_user: "{{ mattermost_system_user }}"
 
 - name: Configure site URL
   shell: |
     jq ".ServiceSettings.SiteURL=\"{{ mattermost_site_url }}\"" /opt/mattermost/config/config.json > /opt/mattermost/config/config.json.tmp
     mv /opt/mattermost/config/config.json.tmp /opt/mattermost/config/config.json
-  become: yes
   become_user: "{{ mattermost_system_user }}"
 
 - name: Setup Mattermost to use systemd for starting and stopping
   template:
     src: mattermost.service.j2
     dest: /lib/systemd/system/mattermost.service
-  become: yes
 
 - name: Make systemd load the new unit
   systemd:
     daemon_reload: yes
-  become: yes
 
 - name: Start the service
-  systemd:
+  service:
     name: mattermost.service
     state: started
     enabled: yes
-  become: yes

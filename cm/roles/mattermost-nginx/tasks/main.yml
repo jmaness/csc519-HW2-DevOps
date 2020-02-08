@@ -1,0 +1,26 @@
+---
+- name: Install nginx
+  package:
+    name: nginx
+    state: present
+
+- name: Apply mattermost nginx proxy configuration
+  template:
+    src: mattermost.j2
+    dest: /etc/nginx/sites-available/mattermost
+
+- name: Remove the existing default sites-enabled file
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+
+- name: Enable the mattermost configuration
+  file:
+    src: /etc/nginx/sites-available/mattermost
+    dest: /etc/nginx/sites-enabled/mattermost
+    state: link
+
+- name: Restart nginx
+  service:
+    name: nginx
+    state: restarted

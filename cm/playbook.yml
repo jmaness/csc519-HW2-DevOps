@@ -9,4 +9,9 @@
     - role: geerlingguy.mysql
       become: yes
     - mattermost-mysql
-    - mattermost-server
+    - role: mattermost-server
+      become: yes
+    - role: mattermost-nginx
+      become: yes
+    - role: mattermost-ufw
+      become: yes

@@ -1,0 +1,31 @@
+---
+- name: Allow ssh traffic
+  ufw:
+    rule: allow
+    port: ssh
+
+- name: Deny incoming traffic by default
+  ufw:
+    default: deny
+    direction: incoming
+
+- name: Allow outgoing traffic by default
+  ufw:
+    default: allow
+    direction: outgoing
+
+- name: Disable external access to port 8065
+  ufw:
+    rule: deny
+    direction: in
+    to_port: '8065'
+
+- name: Enable http access on port 80
+  ufw:
+    rule: allow
+    direction: in
+    to_port: '80'
+
+- name: Enable firewall
+  ufw:
+    state: enabled
