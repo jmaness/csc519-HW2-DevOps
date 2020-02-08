@@ -1,0 +1,23 @@
+---
+- name: Create certificate directory
+  file:
+    path: /etc/letsencrypt/live/{{ mattermost_fqdn }}
+    state: directory
+
+- name: Generate an OpenSSL private key
+  openssl_privatekey:
+    path: /etc/letsencrypt/live/{{ mattermost_fqdn }}/privkey.pem
+
+- name: Generate an OpenSSL CSR
+  openssl_csr:
+    path: /etc/ssl/private/{{ mattermost_fqdn }}.csr
+    privatekey_path: /etc/letsencrypt/live/{{ mattermost_fqdn }}/privkey.pem
+    common_name: "{{ mattermost_fqdn }}"
+
+- name: Generate a Self Signed OpenSSL certificate
+  openssl_certificate:
+    path: /etc/letsencrypt/live/{{ mattermost_fqdn }}/fullchain.pem
+    privatekey_path: /etc/letsencrypt/live/{{ mattermost_fqdn }}/privkey.pem
+    csr_path: /etc/ssl/private/{{ mattermost_fqdn }}.csr
+    provider: selfsigned
+

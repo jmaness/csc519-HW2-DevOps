@@ -26,6 +26,12 @@
     direction: in
     to_port: '80'
 
+- name: Enable https access on port 443
+  ufw:
+    rule: allow
+    direction: in
+    to_port: '443'
+
 - name: Enable firewall
   ufw:
     state: enabled

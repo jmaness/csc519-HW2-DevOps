@@ -4,12 +4,13 @@
 
 - hosts: mattermost
   roles:
-    - ping
     - mysql-deps
     - role: geerlingguy.mysql
       become: yes
     - mattermost-mysql
     - role: mattermost-server
+      become: yes
+    - role: mattermost-ssl
       become: yes
     - role: mattermost-nginx
       become: yes
