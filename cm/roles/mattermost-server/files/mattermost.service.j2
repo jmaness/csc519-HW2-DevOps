@@ -1,0 +1,20 @@
+[Unit]
+Description=Mattermost
+After=network.target
+After=mysql.service
+Requires=mysql.service
+
+[Service]
+Type=notify
+ExecStart=/opt/mattermost/bin/mattermost
+TimeoutStartSec=3600
+Restart=always
+RestartSec=10
+WorkingDirectory=/opt/mattermost
+User={{ mattermost_system_user }}
+Group={{ mattermost_system_group }}
+LimitNOFILE=49152
+
+[Install]
+WantedBy=mysql.service
+
