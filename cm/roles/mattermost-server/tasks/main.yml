@@ -72,6 +72,20 @@
   become: yes
   become_user: "{{ mattermost_system_user }}"
 
+- name: Setup Mattermost to use systemd for starting and stopping
+  template:
+    src: mattermost.service.j2
+    dest: /lib/systemd/system/mattermost.service
+  become: yes
 
-# - name: Setup Mattermost to use systemd for starting and stopping
+- name: Make systemd load the new unit
+  systemd:
+    daemon_reload: yes
+  become: yes
 
+- name: Start the service
+  systemd:
+    name: mattermost.service
+    state: started
+    enabled: yes
+  become: yes
