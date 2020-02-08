@@ -1,0 +1,77 @@
+---
+- name: Download and extract the Mattermost Server files
+  unarchive:
+    src: "{{ mattermost_archive_url }}"
+    dest: /opt
+    remote_src: yes
+    creates: /opt/mattermost
+  become: yes
+
+- name: Create the Mattermost system group
+  group:
+    name: "{{ mattermost_system_group }}"
+  become: yes
+
+- name: Create the Mattermost system user
+  user:
+    name: "{{ mattermost_system_user }}"
+    comment: Mattermost system user
+    group: "{{ mattermost_system_group }}"
+  become: yes
+
+- name: Create storage directory for files
+  file:
+    path: /opt/mattermost/data
+    state: directory
+    owner: "{{ mattermost_system_user }}"
+    group: "{{ mattermost_system_group }}"
+    recurse: true
+  become: yes
+
+- name: Set the user and group mattermost as the owner of Mattermost files
+  file:
+    path: /opt/mattermost
+    state: directory
+    owner: "{{ mattermost_system_user }}"
+    group: "{{ mattermost_system_group }}"
+    recurse: true
+  become: yes
+
+- name: "Give write permissions to the {{ mattermost_system_group }} group"
+  file:
+    path: /opt/mattermost
+    state: directory
+    mode: g+w
+    recurse: true
+  become: yes
+
+- name: Install jq
+  package:
+    name: jq
+    state: present
+  become: yes
+
+- name: Configure database driver
+  shell: |
+    jq ".SqlSettings.DriverName=\"mysql\"" /opt/mattermost/config/config.json > /opt/mattermost/config/config.json.tmp
+    mv /opt/mattermost/config/config.json.tmp /opt/mattermost/config/config.json
+  become: yes
+  become_user: "{{ mattermost_system_user }}"
+
+- name: Configure database datasource
+  shell: |
+    jq ".SqlSettings.DataSource=\"{{ mysql_mmuser_username }}:{{ mysql_mmuser_password }}@tcp(localhost:3306)/mattermost?charset=utf8mb4,utf8&readTimeout=30s&writeTimeout=30s\"" /opt/mattermost/config/config.json > /opt/mattermost/config/config.json.tmp
+    mv /opt/mattermost/config/config.json.tmp /opt/mattermost/config/config.json
+  become: yes
+  become_user: "{{ mattermost_system_user }}"
+
+- name: Configure site URL
+  shell: |
+    jq ".ServiceSettings.SiteURL=\"{{ mattermost_site_url }}\"" /opt/mattermost/config/config.json > /opt/mattermost/config/config.json.tmp
+    mv /opt/mattermost/config/config.json.tmp /opt/mattermost/config/config.json
+  become: yes
+  become_user: "{{ mattermost_system_user }}"
+
+
+# - name: Setup Mattermost to use systemd for starting and stopping
+

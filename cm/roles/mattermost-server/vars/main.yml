@@ -1,0 +1,7 @@
+---
+mattermost_archive_url: https://releases.mattermost.com/5.19.1/mattermost-5.19.1-linux-amd64.tar.gz
+
+mattermost_system_user: mattermost
+mattermost_system_group: mattermost
+
+mattermost_site_url: http://mattermost.example.com

@@ -9,3 +9,4 @@
     - role: geerlingguy.mysql
       become: yes
     - mattermost-mysql
+    - mattermost-server
