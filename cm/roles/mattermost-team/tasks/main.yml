@@ -9,5 +9,7 @@
 - name: Import bulk data
   command: |
     /opt/mattermost/bin/mattermost import bulk /tmp/mattermost-team-data.jsonl --apply
+  args:
+    chdir: /opt/mattermost
   become: yes
 
