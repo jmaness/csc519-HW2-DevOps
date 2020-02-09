@@ -7,4 +7,12 @@ mattermost_system_group: mattermost
 mattermost_server_ip: 127.0.0.1
 mattermost_server_port: 8065
 mattermost_fqdn: mattermost.example.com
-mattermost_site_url: "http://{{ mattermost_fqdn }}"
+mattermost_site_url: "https://{{ mattermost_fqdn }}"
+
+mattermost_config_path: /opt/mattermost/config/config.json
+
+mattermost_smtp_username: "{{ vault_mattermost_smtp_username }}"
+mattermost_smtp_password: "{{ vault_mattermost_smtp_password }}"
+mattermost_smtp_server: smtp.gmail.com
+mattermost_smtp_port: 587
+mattermost_smtp_connection_security: STARTTLS

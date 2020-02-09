@@ -39,27 +39,10 @@
     mode: g+w
     recurse: true
 
-- name: Install jq
-  package:
-    name: jq
-    state: present
-
-- name: Configure database driver
-  shell: |
-    jq ".SqlSettings.DriverName=\"mysql\"" /opt/mattermost/config/config.json > /opt/mattermost/config/config.json.tmp
-    mv /opt/mattermost/config/config.json.tmp /opt/mattermost/config/config.json
-  become_user: "{{ mattermost_system_user }}"
-
-- name: Configure database datasource
-  shell: |
-    jq ".SqlSettings.DataSource=\"{{ mysql_mmuser_username }}:{{ mysql_mmuser_password }}@tcp(localhost:3306)/mattermost?charset=utf8mb4,utf8&readTimeout=30s&writeTimeout=30s\"" /opt/mattermost/config/config.json > /opt/mattermost/config/config.json.tmp
-    mv /opt/mattermost/config/config.json.tmp /opt/mattermost/config/config.json
-  become_user: "{{ mattermost_system_user }}"
-
-- name: Configure site URL
-  shell: |
-    jq ".ServiceSettings.SiteURL=\"{{ mattermost_site_url }}\"" /opt/mattermost/config/config.json > /opt/mattermost/config/config.json.tmp
-    mv /opt/mattermost/config/config.json.tmp /opt/mattermost/config/config.json
+- name: Configure Mattermost
+  template:
+    src: config.json.j2
+    dest: /opt/mattermost/config/config.json
   become_user: "{{ mattermost_system_user }}"
 
 - name: Setup Mattermost to use systemd for starting and stopping
