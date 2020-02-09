@@ -40,9 +40,27 @@
     recurse: true
 
 - name: Configure Mattermost
-  template:
-    src: config.json.j2
-    dest: /opt/mattermost/config/config.json
+  command: |
+    /opt/mattermost/bin/mattermost config set {{ item.key }} {{ item.value }}
+  with_dict: 
+    "ServiceSettings.SiteURL": "{{ mattermost_site_url }}"
+    "SqlSettings.DriverName": "{{ mattermost_sqlsettings_drivername }}"
+    "EmailSettings.SendEmailNotifications": "{{ mattermost_emailsettings_send_email_notifications }}"
+    "EmailSettings.UseChannelInEmailNotifications": "{{ mattermost_emailsettings_use_channel_in_email_notifications }}"
+    "EmailSettings.EnableSMTPAuth": "{{ mattermost_emailsettings_enable_smtp_auth }}"
+    "EmailSettings.SMTPServer": "{{ mattermost_emailsettings_smtp_server }}"
+    "EmailSettings.SMTPPort": "{{ mattermost_emailsettings_smtp_port }}"
+    "EmailSettings.ConnectionSecurity": "{{ mattermost_emailsettings_connection_security }}"
+  become_user: "{{ mattermost_system_user }}"
+
+- name: Configure Mattermost (secure parameters)
+  command: |
+    /opt/mattermost/bin/mattermost config set {{ item.key }} {{ item.value }}
+  with_dict:
+    "SqlSettings.DataSource": "{{ mattermost_sqlsettings_datasource }}"
+    "EmailSettings.SMTPUsername": "{{ mattermost_emailsettings_smtp_username }}"
+    "EmailSettings.SMTPPassword": "{{ mattermost_emailsettings_smtp_password }}"
+  no_log: true
   become_user: "{{ mattermost_system_user }}"
 
 - name: Setup Mattermost to use systemd for starting and stopping
