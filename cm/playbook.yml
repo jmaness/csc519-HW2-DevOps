@@ -4,7 +4,6 @@
 
 - hosts: mattermost
   roles:
-    - mysql-deps
     - role: geerlingguy.mysql
       become: yes
     - mattermost-mysql
@@ -16,4 +15,4 @@
       become: yes
     - role: mattermost-ufw
       become: yes
-    - role: mattermost-team
+    - role: mattermost-data
