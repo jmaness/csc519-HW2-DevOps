@@ -16,3 +16,4 @@
       become: yes
     - role: mattermost-ufw
       become: yes
+    - role: mattermost-team

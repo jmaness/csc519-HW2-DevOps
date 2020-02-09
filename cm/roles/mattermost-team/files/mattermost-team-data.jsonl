@@ -1,0 +1,17 @@
+{ "type": "version" }
+{ "type": "team", "team": { "name": "team-a", "display_name": "Team A", "type": "O", "allow_open_invite": true } }
+{ "type": "team", "team": { "name": "team-b", "display_name": "Team B", "type": "O", "allow_open_invite": true } }
+{ "type": "team", "team": { "name": "team-c", "display_name": "Team C", "type": "O", "allow_open_invite": true } }
+{ "type": "channel", "channel": { "team": "team-a", "name": "channel-a1", "display_name": "General", "type": "O" } }
+{ "type": "channel", "channel": { "team": "team-a", "name": "channel-a2", "display_name": "Announcements", "type": "O" } }
+{ "type": "channel", "channel": { "team": "team-a", "name": "channel-a3", "display_name": "Random", "type": "O" } }
+{ "type": "channel", "channel": { "team": "team-b", "name": "channel-b1", "display_name": "Chat", "type": "O" } }
+{ "type": "channel", "channel": { "team": "team-b", "name": "channel-b2", "display_name": "Homework", "type": "O" } }
+{ "type": "channel", "channel": { "team": "team-c", "name": "channel-c1", "display_name": "Off-Topic", "type": "O" } }
+{ "type": "channel", "channel": { "team": "team-c", "name": "channel-c2", "display_name": "Town Square", "type": "O" } }
+{ "type": "user", "user": { "username": "user1", "email": "jwmanes2+csc512hw2user1", "password": "Matters1234!", "teams": [ { "name": "team-a", "roles": "team_user", "channels": [ { "name": "channel-a1", "roles": "channel_user" } ] }, { "name": "team-b", "roles": "team_user", "channels": [ { "name": "channel-b1", "roles": "channel_user" } ] } ] } }
+{ "type": "user", "user": { "username": "user2", "email": "jwmanes2+csc512hw2user2", "password": "Matters1234!", "teams": [ { "name": "team-a", "roles": "team_user", "channels": [ { "name": "channel-a1", "roles": "channel_user" } ] }, { "name": "team-c", "roles": "team_user", "channels": [ { "name": "channel-c1", "roles": "channel_user" } ] } ] } }
+{ "type": "user", "user": { "username": "user3", "email": "jwmanes2+csc512hw2user3", "password": "Matters1234!", "teams": [ { "name": "team-a", "roles": "team_user", "channels": [ { "name": "channel-a1", "roles": "channel_user" } ] } ] } }
+{ "type": "user", "user": { "username": "user4", "email": "jwmanes2+csc512hw2user4", "password": "Matters1234!", "teams": [ { "name": "team-a", "roles": "team_user", "channels": [ { "name": "channel-a1", "roles": "channel_user" } ] } ] } }
+{ "type": "user", "user": { "username": "user5", "email": "jwmanes2+csc512hw2user5", "password": "Matters1234!", "teams": [ { "name": "team-b", "roles": "team_user", "channels": [ { "name": "channel-a1", "roles": "channel_user" } ] } ] }
+{ "type": "user", "user": { "username": "user6", "email": "jwmanes2+csc512hw2user6", "password": "Matters1234!", "teams": [ { "name": "team-b", "roles": "team_user", "channels": [ { "name": "channel-a1", "roles": "channel_user" } ] } ] } }}
