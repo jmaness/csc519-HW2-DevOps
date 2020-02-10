@@ -37,23 +37,23 @@ The opunit tests do not handle optional extra credit configuration involving fir
 With the mattermost-srv availability port check changed to port 80 and with the mattermost-srv SSL certificate added as a trusted certificate, all opunit checks pass.
 
 ### Evaluation
-[x] Install Ubuntu 18.04 LTS
-[x] Install MySQL Database Server
-[x] Install Mattermost Server
-[x] Finalize configuring the mattermost server
-[x] Create a team and users
-[x] Demonstrate you can actually use mattermost by posting some messages
-[x] Use best practices
-[x] Everything is setup automatically. No manual steps.
-[x] Limited use ansible galaxy roles. The only Ansible Galaxy role use is `geerlingguy.mysql` to install mysql
+- [x] Install Ubuntu 18.04 LTS
+- [x] Install MySQL Database Server
+- [x] Install Mattermost Server
+- [x] Finalize configuring the mattermost server
+- [x] Create a team and users
+- [x] Demonstrate you can actually use mattermost by posting some messages
+- [x] Use best practices
+- [x] Everything is setup automatically. No manual steps.
+- [x] Limited use ansible galaxy roles. The only Ansible Galaxy role use is `geerlingguy.mysql` to install mysql
 
 #### Extra requirements
-[x] (5 points) Automate the creation of teams and other mattermost server configuration
+- [x] (5 points) Automate the creation of teams and other mattermost server configuration
     - Implemented custom Ansible module for idempotent Mattermost configuration
     - Used mattermost bulk import API for creation of teams, channels, and users
-[x] (5 points) Configure the ability to send email notifications
-[x] (10 points) Complete the section "Configuring NGINX as a proxy for Mattermost Server" in mattermost installation instructions
-[x] (5 points) Complete the section "Configuring NGINX with SSL and HTTP/2". Note you can setup a local hosts file for enabling temporary testing of your SSL configuration.
+- [x] (5 points) Configure the ability to send email notifications
+- [x] (10 points) Complete the section "Configuring NGINX as a proxy for Mattermost Server" in mattermost installation instructions
+- [x] (5 points) Complete the section "Configuring NGINX with SSL and HTTP/2". Note you can setup a local hosts file for enabling temporary testing of your SSL configuration.
     - The section described using Lets Encrypt which performs some external validation including that the configured CN is resolvable via DNS and the server is externally reachable for HTTP validation which is not possible with a host-only network configuration without additional host networking configuration (e.g packet routing), so I opted for a sign-signed SSL certificate instead.
     
 ### Screencast
