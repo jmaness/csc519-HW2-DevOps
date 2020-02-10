@@ -9,8 +9,6 @@ mattermost_server_port: 8065
 mattermost_fqdn: mattermost.example.com
 mattermost_site_url: "https://{{ mattermost_fqdn }}"
 
-mattermost_config_path: /opt/mattermost/config/config.json
-
 mattermost_sqlsettings_drivername: mysql
 mattermost_sqlsettings_datasource: "{{ mysql_mmuser_username }}:{{ mysql_mmuser_password }}@tcp(localhost:3306)/mattermost?charset=utf8mb4,utf8&readTimeout=30s&writeTimeout=30s" 
 
