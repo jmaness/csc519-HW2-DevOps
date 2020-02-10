@@ -57,4 +57,4 @@ With the mattermost-srv availability port check changed to port 80 and with the 
     - The section described using Lets Encrypt which performs some external validation including that the configured CN is resolvable via DNS and the server is externally reachable for HTTP validation which is not possible with a host-only network configuration without additional host networking configuration (e.g packet routing), so I opted for a sign-signed SSL certificate instead.
     
 ### Screencast
-    
+https://drive.google.com/open?id=17CYgBXEJeG4CLvFXR2hkt5KAbFOiGEAT (Requires NCSU credentials)
