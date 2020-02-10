@@ -13,14 +13,17 @@
   file:
     path: /etc/nginx/sites-enabled/default
     state: absent
+  register: nginx_default_conf
 
 - name: Enable the mattermost configuration
   file:
     src: /etc/nginx/sites-available/mattermost
     dest: /etc/nginx/sites-enabled/mattermost
     state: link
+  register: nginx_mattermost_conf
 
 - name: Restart nginx
   service:
     name: nginx
     state: restarted
+  when: nginx_default_conf.changed or nginx_mattermost_conf.changed

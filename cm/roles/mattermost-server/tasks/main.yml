@@ -5,6 +5,7 @@
     dest: /opt
     remote_src: yes
     creates: /opt/mattermost
+  register: mattermost_unarchive
 
 - name: Create the Mattermost system group
   group:
@@ -38,6 +39,7 @@
     state: directory
     mode: g+w
     recurse: true
+  when: mattermost_unarchive.changed
 
 - name: Configure Mattermost
   command: |

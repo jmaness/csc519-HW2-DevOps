@@ -4,11 +4,20 @@
     src: "{{ mattermost_team_data }}"
     dest: /tmp/mattermost-team-data.jsonl
     owner: "{{ mattermost_system_user }}"
+  register: bulk_data
 
 - name: Import bulk data
   command: |
     /opt/mattermost/bin/mattermost import bulk /tmp/mattermost-team-data.jsonl --apply
   args:
     chdir: /opt/mattermost
+  when: bulk_data.changed
   become_user: "{{ mattermost_system_user }}"
 
+- name: "Fix write permissions for the {{ mattermost_system_group }} group after bulk import"
+  file:
+    path: /opt/mattermost
+    state: directory
+    mode: g+w
+    recurse: true
+  when: bulk_data.changed
