@@ -41,9 +41,15 @@
     recurse: true
   when: mattermost_unarchive.changed
 
+- name: Install python3-distutils
+  package:
+    name: python3-distutils
+    state: present
+
 - name: Configure Mattermost
-  command: |
-    /opt/mattermost/bin/mattermost config set {{ item.key }} {{ item.value }}
+  mattermost_config:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
   with_dict: 
     "ServiceSettings.SiteURL": "{{ mattermost_site_url }}"
     "SqlSettings.DriverName": "{{ mattermost_sqlsettings_drivername }}"
@@ -56,8 +62,9 @@
   become_user: "{{ mattermost_system_user }}"
 
 - name: Configure Mattermost (secure parameters)
-  command: |
-    /opt/mattermost/bin/mattermost config set {{ item.key }} {{ item.value }}
+  mattermost_config:
+    key: "{{ item.key }}"
+    value: "{{ item.value }}"
   with_dict:
     "SqlSettings.DataSource": "{{ mattermost_sqlsettings_datasource }}"
     "EmailSettings.SMTPUsername": "{{ mattermost_emailsettings_smtp_username }}"

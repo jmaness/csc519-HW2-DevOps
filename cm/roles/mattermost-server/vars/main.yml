@@ -14,9 +14,9 @@ mattermost_config_path: /opt/mattermost/config/config.json
 mattermost_sqlsettings_drivername: mysql
 mattermost_sqlsettings_datasource: "{{ mysql_mmuser_username }}:{{ mysql_mmuser_password }}@tcp(localhost:3306)/mattermost?charset=utf8mb4,utf8&readTimeout=30s&writeTimeout=30s" 
 
-mattermost_emailsettings_send_email_notifications: true
-mattermost_emailsettings_use_channel_in_email_notifications: true
-mattermost_emailsettings_enable_smtp_auth: true
+mattermost_emailsettings_send_email_notifications: "true"
+mattermost_emailsettings_use_channel_in_email_notifications: "true"
+mattermost_emailsettings_enable_smtp_auth: "true"
 mattermost_emailsettings_smtp_username: "{{ vault_mattermost_emailsettings_smtp_username }}"
 mattermost_emailsettings_smtp_password: "{{ vault_mattermost_emailsettings_smtp_password }}"
 mattermost_emailsettings_smtp_server: smtp.gmail.com
