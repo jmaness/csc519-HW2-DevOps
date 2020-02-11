@@ -57,3 +57,5 @@ With the mattermost-srv availability port check changed to port 80 and with the 
     
 ### Screencast
 https://drive.google.com/open?id=17CYgBXEJeG4CLvFXR2hkt5KAbFOiGEAT (Requires NCSU credentials)
+
+NOTE: The screencast references a vault pass file argument that has now been replaced with an optional `--vaultpass` argument based on a recent request by Samim Mirhosseini Ghamsa <smirhos@ncsu.edu> to not require a vault pass and hard code a default for testing automation.
