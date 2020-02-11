@@ -24,8 +24,7 @@ You can run the `cm setup` command to :
 
 *Note*: You must run `cm setup` while your cwd is inside the HW2-DevOps folder in order for the current sync path to be setup.
 
-You can also run `cm playbook cm/playbook.yml cm/inventory.ini .vault_pass.txt`. Note: `.vault_pass.txt` should contain the password to the Ansible Vault containing
-passwords for Mattermost system and database users.
+You can also run `cm playbook cm/playbook.yml cm/inventory.ini`. Optionally, you can specify the vault password with the `--vaultpass` argument. 
 
 ### Opunit
 As reported at https://stackoverflow.com/c/ncsu/questions/1416, an extra credit option is to configure NGINX with SSL which included steps to deny incoming traffic on port 8065, so the following screenshots show opunit results with various configurations.
