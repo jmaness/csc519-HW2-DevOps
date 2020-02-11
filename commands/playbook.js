@@ -30,6 +30,8 @@ exports.handler = async argv => {
             fs.writeFileSync(vaultPasswordFile, argv.vp);
 
             await run(file, inventory, vaultPasswordFile);
+
+            fs.unlinkSync(vaultPasswordFile);
         }
 
         else {
